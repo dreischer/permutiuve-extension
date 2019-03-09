@@ -1,0 +1,16 @@
+.menu a {
+  text-decoration: none;
+  color: rgb(97,104,106);
+  cursor: pointer;
+}
+.menu a:after {
+  content: '|';
+  display: inline-block;
+  margin: 0 10px;
+}
+.menu a:last-of-type:after {
+  content: '';
+}
+.menu a.menu-active {
+  text-decoration: underline;
+}

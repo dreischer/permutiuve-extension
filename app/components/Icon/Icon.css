@@ -1,0 +1,18 @@
+.icon-outer {
+  height: 65px;
+  width: 65px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #3a434c;
+  box-shadow: 0px 0px 3px #8888889e;
+}
+.icon-inner {
+  background-size: 130px;
+  background-repeat: no-repeat;
+  background-position: 2px 9px;
+  background-image: url(https://files.readme.io/SerzaW6yR7gV3G1Ls9Uy_logo-permutive.png);
+  width: 40px;
+  height: 100%;
+  margin: 0 auto;
+}
