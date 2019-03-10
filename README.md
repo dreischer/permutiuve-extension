@@ -1,5 +1,7 @@
+<p align="center">
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
+</p>
+<hr>
 
 # Deployment
 
@@ -10,7 +12,8 @@ TODO:
 * Upload app file to a CDN and set it as `CDN_APP_URL` in `extension/loader.js`
 * Upload the extension to the Chrome Web Store
 
----
+<hr>
+
 # Development setup
 
 ## Chrome extension
