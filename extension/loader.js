@@ -2,7 +2,7 @@ const OPEN_KEY = '_prmtv_widgetOpen'
 const OPEN_CLASSNAME = 'prmtv_active'
 const CDN_APP_URL = '../dist/app.js'
 
-  ;(function initPermutiveIframe () {
+;(function initPermutiveIframe () {
   addCss(`
     .prtv_viewer {
       display: none;
