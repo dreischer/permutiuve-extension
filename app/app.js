@@ -4,7 +4,7 @@ import Header from './components/Header'
 import Icon from './components/Icon'
 import Menu from './components/Menu'
 import { Events, Segments } from './Views'
-import { OPEN_KEY, OPEN_CLASSNAME } from '../constants'
+import { OPEN_KEY, OPEN_CLASSNAME } from './constants'
 
 import './index.css'
 
@@ -12,7 +12,7 @@ export default class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      open: JSON.parse(window.localStorage[OPEN_KEY] || 'true'),
+      open: JSON.parse(window.localStorage[OPEN_KEY] || 'false'),
       activeItem: 'events',
       items: [
         { name: 'Events', id: 'events', content: <Events /> },

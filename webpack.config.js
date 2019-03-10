@@ -3,12 +3,11 @@ const path = require('path')
 
 module.exports = {
   entry: {
-    app: './app',
-    loader: './loader'
+    app: './app'
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'extension/dist/'),
+    path: path.resolve(__dirname, 'dist/'),
     publicPath: 'https://localhost:9000/dist/'
   },
   devtool: 'source-map',

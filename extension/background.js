@@ -35,7 +35,7 @@ function isActive () {
 window.chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (isActive() && changeInfo.status === 'complete') {
     window.chrome.tabs.executeScript(tabId, {
-      file: './dist/loader.js'
+      file: './loader.js'
     })
   }
 })

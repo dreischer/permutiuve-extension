@@ -5,6 +5,7 @@ window.React = React
 
 document.addEventListener('DOMContentLoaded', function (event) {
   if (window.parent.permutive) {
+    window.frameElement.style.display = 'block'
     render()
   }
 })

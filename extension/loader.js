@@ -1,4 +1,6 @@
-import { OPEN_KEY, OPEN_CLASSNAME } from './constants'
+const OPEN_KEY = '_prmtv_widgetOpen'
+const OPEN_CLASSNAME = 'prmtv_active'
+const CDN_APP_URL = '../dist/app.js'
 
   ;(function initPermutiveIframe () {
   addCss(`
@@ -7,7 +9,7 @@ import { OPEN_KEY, OPEN_CLASSNAME } from './constants'
       position: fixed;
       bottom: 15px;
       right: 15px;
-      z-index: 99999999;
+      z-index: 9999999999;
       border: none;
       height: 65px;
       width: 65px;
@@ -21,7 +23,10 @@ import { OPEN_KEY, OPEN_CLASSNAME } from './constants'
     }
   `)
 
-  addIframe()
+  window.chrome.storage.sync.get(['devMode', 'appURL'], function (result) {
+    var appURL = result.devMode ? result.appURL : CDN_APP_URL
+    addIframe(appURL)
+  })
 
   function addCss (str) {
     var node = document.createElement('style')
@@ -29,20 +34,18 @@ import { OPEN_KEY, OPEN_CLASSNAME } from './constants'
     document.head.appendChild(node)
   }
 
-  function addIframe (content, className) {
+  function addIframe (source) {
     var iframe = document.createElement('iframe')
-    var active = JSON.parse(window.localStorage[OPEN_KEY] || 'true')
+    var active = JSON.parse(window.localStorage[OPEN_KEY] || 'false')
     var activeClass = active ? OPEN_CLASSNAME : ''
     iframe.className = `prtv_viewer ${activeClass}`
     document.body.appendChild(iframe)
 
     var context = (iframe.contentWindow || iframe.contentDocument.document || iframe.contentDocument)
     var doc = context.document
-    var appUrl = 'https://localhost:9000/dist/app.js' || window.chrome.runtime.getURL('./dist/app.js')
 
     doc.open()
-    // TODO can we write the script as inline JS?
-    doc.write(`<script src="${appUrl}" crossorigin="anonymous"></script>`)
+    doc.write(`<script src="${source}" crossorigin="anonymous"></script>`)
     doc.close()
   }
 })()

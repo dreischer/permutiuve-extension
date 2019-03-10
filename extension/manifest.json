@@ -21,5 +21,9 @@
   "web_accessible_resources": [
     "dist/loader.js",
     "dist/app.js"
-  ]
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  }
 }

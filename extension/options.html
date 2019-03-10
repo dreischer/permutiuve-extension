@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Options</title>
+    <style>
+      label span {
+        width: 150px;
+        display: inline-block;
+      }
+      .row {
+        line-height: 25px;
+      }
+      input[type=text] {
+        width: 180px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='row'>
+      <label>
+        <span>Development Mode:</span>
+        <input type="checkbox" class="devMode">
+      </label>
+    </div>
+
+    <div class='options-url row'>
+      <label>
+        <span>Development App URL:</span>
+        <input type="text" class="appURL">
+      </label>
+    </div>
+
+    <div class='options-url row'>
+      <button id="saveOptions">Save</button>
+      <span id="saveStatus"></span>
+    </div>
+
+    <script src="./options.js"></script>
+  </body>
+</html>
