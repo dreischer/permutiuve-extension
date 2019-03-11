@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "preact": "^8.1.0"
+    "preact": "^8.1.0",
+    "tiny-atom": "^4.2.0"
   },
   "devDependencies": {
     "buble": "^0.19.3",

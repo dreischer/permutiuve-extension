@@ -1,4 +1,5 @@
 import React, { Component } from 'preact'
+import { Consumer } from 'tiny-atom/preact'
 
 class EventItem extends Component {
   constructor (props) {
@@ -33,31 +34,21 @@ class EventItem extends Component {
 }
 
 export default class Events extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      events: [],
-      count: 0
-    }
-  }
-
-  componentDidMount () {
-    window.parent.permutive.on(/.*/, (event) => {
-      this.setState({
-        events: this.state.events.concat(event),
-        count: ++this.state.count
-      })
-    }).replay()
-  }
-
   render (props, state) {
-    const events = state.events.map(event => <EventItem event={event} />)
+    const map = function (state) {
+      return {
+        events: state.data.events.map(event => <EventItem event={event} />)
+      }
+    }
     return (
-      <div className=''>
-        <h1 class='view-title'>Events</h1>
-        <span class='count'>{`(${state.count})`}</span>
-        <div>{events}</div>
-      </div>
+      <Consumer map={map} >
+        {({ events }) => (
+          <div className=''>
+            <h1 class='view-title'>Events</h1>
+            <div>{events}</div>
+          </div>
+        )}
+      </Consumer>
     )
   }
 }

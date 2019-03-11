@@ -1,59 +1,81 @@
 import React from 'preact'
+import createAtom from 'tiny-atom'
+import { Provider, Consumer } from 'tiny-atom/preact'
 
 import Header from './components/Header'
 import Icon from './components/Icon'
 import Menu from './components/Menu'
-import { Events, Segments } from './Views'
 import { OPEN_KEY, OPEN_CLASSNAME } from './constants'
 
 import './index.css'
 
+const log = require('tiny-atom/log')
+const { initialState, actions } = require('./actions')
+const atom = window.atom = createAtom(initialState, actions, { debug: log() })
+
 export default class App extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      open: JSON.parse(window.localStorage[OPEN_KEY] || 'false'),
-      activeItem: 'events',
-      items: [
-        { name: 'Events', id: 'events', content: <Events /> },
-        { name: 'Segments', id: 'segments', content: <Segments /> }
-      ]
-    }
-  }
   toggle () {
-    const open = !this.state.open
+    const open = !atom.get().open
     window.localStorage[OPEN_KEY] = open
     if (open) {
       window.frameElement.classList.add(OPEN_CLASSNAME)
     } else {
       window.frameElement.classList.remove(OPEN_CLASSNAME)
     }
-    this.setState({
-      open: open
-    })
+    atom.set({ open })
   }
   navigationChange (id) {
-    this.setState({
-      activeItem: id
+    atom.set({
+      navigation: {
+        ...atom.get().navigation,
+        activeItem: id
+      }
     })
+  }
+  componentDidMount () {
+    window.parent.permutive.on(/.*/, atom.actions.addEvent).replay()
+    atom.actions.updateSegments()
+    window.parent.permutive.on(/Segment(Entry|Exit)/, atom.actions.updateSegments)
   }
   render (props, state) {
     const icon = <Icon toggle={this.toggle.bind(this)} />
-    const content = state.items.find(item => item.id === state.activeItem).content
+    const map = function (state) {
+      const { open, navigation, data } = state
+      return {
+        open,
+        content: navigation.items.find(item => item.id === navigation.activeItem).content,
+        activeItem: navigation.activeItem,
+        items: navigation.items,
+        counts: {
+          events: data.eventCount,
+          segments: data.segmentCount
+        }
+      }
+    }
     const widget = (
-      <div>
-        <Header toggle={this.toggle.bind(this)} />
-        <div class='content'>
-          <Menu items={this.state.items} activeItem={state.activeItem} onChange={this.navigationChange.bind(this)} />
-          { content }
-        </div>
-      </div>
+      <Consumer map={map} >
+        {({ content, activeItem, items, counts }) => (
+          <div>
+            <Header toggle={this.toggle.bind(this)} />
+            <div class='content'>
+              <Menu items={items} activeItem={activeItem} counts={counts} onChange={this.navigationChange.bind(this)} />
+              { content }
+            </div>
+          </div>
+        )}
+      </Consumer>
     )
 
     return (
-      <div id='app'>
-        {state.open ? widget : icon}
-      </div>
+      <Provider atom={atom}>
+        <Consumer map={map} >
+          {({ open }) => (
+            <div id='app'>
+              {open ? widget : icon}
+            </div>
+          )}
+        </Consumer>
+      </Provider>
     )
   }
 }
