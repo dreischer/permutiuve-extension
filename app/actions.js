@@ -1,6 +1,6 @@
 import React from 'preact'
-import { OPEN_KEY } from './constants'
 import { Events, Segments } from './Views'
+import { OPEN_KEY, OPEN_CLASSNAME } from './constants'
 
 const initialState = {
   open: JSON.parse(window.localStorage[OPEN_KEY] || 'false'),
@@ -37,6 +37,26 @@ const actions = {
         segmentCount: segments.length
       })
       set({ data: newData })
+    })
+  },
+  toggleOpen ({ get, set, dispatch }) {
+    const { open } = get()
+    const nowOpen = !open
+    window.localStorage[OPEN_KEY] = nowOpen
+    if (nowOpen) {
+      window.frameElement.classList.add(OPEN_CLASSNAME)
+    } else {
+      window.frameElement.classList.remove(OPEN_CLASSNAME)
+    }
+    set({ open: nowOpen })
+  },
+  setMenuLocation ({ get, set, dispatch }, id) {
+    const { navigation } = get()
+    set({
+      navigation: {
+        ...navigation,
+        activeItem: id
+      }
     })
   }
 }
