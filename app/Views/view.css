@@ -28,6 +28,7 @@
 }
 .event-summary .event-time {
   display: inline-block;
+  float: right;
 }
 .event-full {
   display: none;

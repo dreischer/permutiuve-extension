@@ -18,12 +18,13 @@ class EventItem extends Component {
   render (props, state) {
     const { event } = props
     const activeClass = state.open ? 'active' : ''
+    const time = new Date(event.time).toLocaleString()
 
     return (
       <div class={`event ${activeClass}`}>
         <div class='event-summary' onclick={this.toggle.bind(this)}>
           <div class='event-name'>{event.name}</div>
-          <div class='event-time'>{event.time}</div>
+          <div class='event-time'>{time}</div>
         </div>
         <div class='event-full'>
           <pre>{JSON.stringify(event, null, 2)}</pre>
