@@ -11,8 +11,8 @@ const CDN_APP_URL = '../dist/app.js'
       right: 15px;
       z-index: 9999999999;
       border: none;
-      height: 65px;
-      width: 65px;
+      height: 75px;
+      width: 75px;
     }
     .prtv_viewer.${OPEN_CLASSNAME} {
       top: 0;

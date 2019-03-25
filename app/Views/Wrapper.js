@@ -35,8 +35,8 @@ export default class Wrapper extends Component {
 
     const icon = (
       <Consumer map={map} actions={actions} >
-        {({ toggleOpen }) => (
-          <Icon toggle={toggleOpen} />
+        {({ counts, toggleOpen }) => (
+          <Icon counts={counts} toggle={toggleOpen} />
         )}
       </Consumer>
     )
