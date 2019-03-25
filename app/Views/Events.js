@@ -1,6 +1,11 @@
 import React, { Component } from 'preact'
 import { Consumer } from 'tiny-atom/preact'
 
+import 'brace'
+import 'brace/mode/json'
+import 'brace/theme/dawn'
+import AceEditor from 'react-ace'
+
 class EventItem extends Component {
   constructor (props) {
     super(props)
@@ -27,7 +32,17 @@ class EventItem extends Component {
           <div class='event-time'>{time}</div>
         </div>
         <div class='event-full'>
-          <pre>{JSON.stringify(event, null, 2)}</pre>
+          <AceEditor
+            mode='json'
+            theme='dawn'
+            height='500px'
+            width='100%'
+            readOnly
+            wrapEnabled
+            value={JSON.stringify(event, null, 2)}
+            editorProps={{ $blockScrolling: true }}
+            setOptions={{ useWorker: false }} // we don't need syntax checking
+          />
         </div>
       </div>
     )

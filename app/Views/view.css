@@ -34,7 +34,7 @@
   display: none;
   overflow: hidden;
   margin: 0;
-  padding: 20px;
+  padding: 0px;
 }
 .event.active .event-full {
   display: block;
