@@ -39,20 +39,9 @@
 .event.active .event-full {
   display: block;
 }
-pre {
-  margin: 0;
-  background: rgb(248,250,251);
-  border-radius: 3px;
-  border: 1px solid rgb(238,238,238);
-  color: rgb(75,89,94);
-  -webkit-font-smoothing: subpixel-antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: block;
-  padding: 9.5px;
-  margin: 0 0 10px;
-  font-size: 13px;
-  line-height: 1.42857143;
-  word-break: break-all;
-  word-wrap: break-word;
-  overflow: scroll;
+.list-filter {
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #d4d4d4;
 }

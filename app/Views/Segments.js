@@ -5,7 +5,7 @@ export default class Segments extends Component {
   render (props, state) {
     const map = function (state) {
       return {
-        segments: state.data.segments.map(segment => <div>{segment}</div>)
+        segments: state.data.segments.map(segment => <li>{segment}</li>)
       }
     }
     return (
@@ -13,7 +13,9 @@ export default class Segments extends Component {
         {({ segments }) => (
           <div className=''>
             <h1 class='view-title'>Segments</h1>
-            {segments}
+            <ul>
+              {segments}
+            </ul>
           </div>
         )}
       </Consumer>
