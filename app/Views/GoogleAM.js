@@ -4,7 +4,7 @@ import Item from '../components/Item'
 
 function makeObject (str) {
   const output = {}
-  const nested = ['cust_params', 'prev_scp']
+  const nested = ['cust_params', 'prev_scp', 'scp']
   const array = ['permutive', 'plat', 'eid', 'iu_parts', 'enc_prev_ius', 'prev_iu_szs', 'fws']
 
   str.split('&').forEach(param => {
