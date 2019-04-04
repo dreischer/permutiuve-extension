@@ -1,0 +1,36 @@
+.item {
+  border-radius: 5px;
+  margin: 10px 0;
+  box-shadow: 0 0px 2px rgba(0, 0, 0, 0.4);
+}
+.item-summary {
+  line-height: 30px;
+  padding: 10px;
+  background: rgb(248,250,251);
+  border-radius: 5px;
+}
+.item-summary.hasPayload {
+  cursor: pointer;
+}
+.item.open .item-summary {
+  border-radius: 5px 5px 0px 0px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.item-summary .item-title {
+  display: inline-block;
+  margin-right: 20px;
+  font-weight: bold;
+}
+.item-summary .item-subtitle {
+  display: inline-block;
+  float: right;
+}
+.item-content {
+  display: none;
+  overflow: hidden;
+  margin: 0;
+  padding: 0px;
+}
+.item.open .item-content {
+  display: block;
+}

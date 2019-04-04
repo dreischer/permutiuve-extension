@@ -1,44 +1,9 @@
-
- .view-title {
+.view-title {
    display: inline-block;
    vertical-align: -2px;
    margin-right: 10px;
  }
 
-.event {
-  border-radius: 5px;
-  margin: 10px 0;
-  box-shadow: 0 0px 2px rgba(0, 0, 0, 0.4);
-}
-.event-summary {
-  cursor: pointer;
-  line-height: 30px;
-  padding: 10px;
-  background: rgb(248,250,251);
-  border-radius: 5px;
-}
-.event.active .event-summary {
-  border-radius: 5px 5px 0px 0px;
-  border-bottom: 1px solid #e5e5e5;
-}
-.event-summary .event-name {
-  display: inline-block;
-  margin-right: 20px;
-  font-weight: bold;
-}
-.event-summary .event-time {
-  display: inline-block;
-  float: right;
-}
-.event-full {
-  display: none;
-  overflow: hidden;
-  margin: 0;
-  padding: 0px;
-}
-.event.active .event-full {
-  display: block;
-}
 .list-filter {
   width: 100%;
   border-radius: 5px;

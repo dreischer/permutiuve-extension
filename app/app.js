@@ -11,8 +11,8 @@ const atom = createAtom(initialState(), actions, { debug: log() })
 
 function initialState () {
   const { initialState } = require('./actions')
-  console.log(initialState)
-  console.log(Object.assign({}, initialState, window.hotAtom))
+  // console.log(initialState)
+  // console.log(Object.assign({}, initialState, window.hotAtom))
   // return Object.assign({}, initialState, window.hotAtom)
   return initialState
 }

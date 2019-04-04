@@ -1,10 +1,3 @@
-/*
-* content_script doesn't have access to window variables / JS. Therefore
-* we use this as an interface to pass on the event to the injected scripts.
-* Chrome also doesn't allow customEvents, so we senf off a
-* generic event and store the data in LS. The injected script then picks it
-* up from there.
-*/
 window.chrome.browserAction.onClicked.addListener(function (tab) {
   var state = !isActive()
   setActive(state)
@@ -32,10 +25,28 @@ function isActive () {
   return JSON.parse(val)
 }
 
+// injecting content script
 window.chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (isActive() && changeInfo.status === 'complete') {
     window.chrome.tabs.executeScript(tabId, {
       file: './loader.js'
     })
   }
+})
+
+// sending DFP ad requests to content script
+window.chrome.tabs.onCreated.addListener(function (tab) {
+  var callback = function (details) {
+    if (details.frameId === 0) {
+      window.chrome.tabs.sendMessage(tab.id, {
+        name: 'perm_extension_dfpRequest',
+        url: details.url
+      })
+    }
+  }
+  var filter = {
+    urls: ['*://securepubads.g.doubleclick.net/gampad/ads?*'],
+    tabId: tab.id
+  }
+  window.chrome.webRequest.onCompleted.addListener(callback, filter)
 })

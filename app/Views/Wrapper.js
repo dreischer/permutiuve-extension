@@ -11,23 +11,27 @@ export default class Wrapper extends Component {
     atom.actions.updateSegments()
     const allEvents = window.parent.permutive.on(/.*/, atom.actions.addEvent).replay()
     const segmentEvents = window.parent.permutive.on(/Segment(Entry|Exit)/, atom.actions.updateSegments)
-
-    // remove any existing event listeners
+    window.parent.addEventListener('message', atom.actions.addDfp)
     window.eventListeners = window.eventListeners || []
-    window.eventListeners.forEach(listener => listener.remove())
     window.eventListeners = [allEvents, segmentEvents]
+  }
+  componentWillUnmount () {
+    const { atom } = this.props
+    window.eventListeners.forEach(listener => listener.remove())
+    window.parent.removeEventListener('message', atom.actions.addDfp)
   }
   render (props, state) {
     const map = function (state) {
       const { open, navigation, data } = state
       return {
         open,
-        content: navigation.items.find(item => item.id === navigation.activeItem).content,
+        content: navigation.items.find(item => item.id === navigation.activeItem).component,
         activeItem: navigation.activeItem,
         items: navigation.items,
         counts: {
-          events: data.eventCount,
-          segments: data.segmentCount
+          events: data.events.count,
+          segments: data.segments.count,
+          googleAM: data.googleAM.count
         }
       }
     }

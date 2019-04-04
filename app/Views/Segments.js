@@ -1,11 +1,12 @@
 import React, { Component } from 'preact'
 import { Consumer } from 'tiny-atom/preact'
+import Item from '../components/Item'
 
 export default class Segments extends Component {
   render (props, state) {
     const map = function (state) {
       return {
-        segments: state.data.segments.map(segment => <li>{segment}</li>)
+        segments: state.data.segments.items.map(segment => <Item title={segment} />)
       }
     }
     return (
@@ -13,9 +14,7 @@ export default class Segments extends Component {
         {({ segments }) => (
           <div className=''>
             <h1 class='view-title'>Segments</h1>
-            <ul>
-              {segments}
-            </ul>
+            {segments}
           </div>
         )}
       </Consumer>

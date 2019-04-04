@@ -1,4 +1,5 @@
 const OPEN_KEY = '_prmtv_widgetOpen'
+const DFP_REQUESTS_KEY = '_prmtv_dfpRequests'
 const OPEN_CLASSNAME = 'prmtv_active'
 const CDN_APP_URL = '../dist/app.js'
 
@@ -43,6 +44,18 @@ const CDN_APP_URL = '../dist/app.js'
 
     var context = (iframe.contentWindow || iframe.contentDocument.document || iframe.contentDocument)
     var doc = context.document
+
+    window.sessionStorage[DFP_REQUESTS_KEY] = '[]' // reset on every pageview
+    window.chrome.runtime.onMessage.addListener(function (message) {
+      if (message.name === 'perm_extension_dfpRequest') {
+        var data = JSON.parse(window.sessionStorage[DFP_REQUESTS_KEY])
+        window.sessionStorage[DFP_REQUESTS_KEY] = JSON.stringify([...data, message])
+        window.postMessage({
+          type: 'perm_extension_dfpRequest',
+          data: message
+        }, '*')
+      }
+    })
 
     doc.open()
     doc.write(`<script src="${source}" crossorigin="anonymous"></script>`)
