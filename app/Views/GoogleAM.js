@@ -24,7 +24,7 @@ export default class Events extends Component {
 
 function mapDFP (item) {
   const object = makeObject(item.url.split('?')[1])
-  const name = object.callback || object.iu_parts || object.slotname
+  const name = object.iu || object.iu_parts || object.slotname
   const segments = object.cust_params && object.cust_params.permutive && object.cust_params.permutive.length
   const subtitle = segments ? '✔ Targeted' : 'Not targeted'
 
