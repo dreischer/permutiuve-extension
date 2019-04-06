@@ -8,7 +8,7 @@ bootstrap:
 dev:
 	NODE_ENV=development $(BIN)/webpack-dev-server --hot --watch --mode=development
 
-build:
+build: clean test
 	NODE_ENV=production $(BIN)/webpack -p --progress --mode=production
 
 test: lint
