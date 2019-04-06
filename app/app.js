@@ -36,12 +36,20 @@ export default class App extends Component {
 class Inner extends Component {
   componentDidMount () {
     const { atom } = this.props
+
     atom.actions.updateSegments()
     window.parent.addEventListener('message', atom.actions.addDfp)
-    const allEvents = window.parent.permutive.on(/.*/, atom.actions.addEvent).replay()
+    const allEvents = window.parent.permutive.on(/.*/, atom.actions.addEvent)
     const segmentEvents = window.parent.permutive.on(/Segment(Entry|Exit)/, atom.actions.updateSegments)
+
+    // remove any event listeners on reload
     window.eventListeners = window.eventListeners || []
     window.eventListeners = [allEvents, segmentEvents]
+
+    // only replay event if queue still exists (permutive didn't initialise)
+    if (!window.parent.permutive.q) {
+      allEvents.replay()
+    }
   }
   componentWillUnmount () {
     const { atom } = this.props
