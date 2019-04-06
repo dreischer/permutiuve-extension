@@ -1,0 +1,11 @@
+.list-filter {
+  width: 100%;
+  border-radius: 0;
+  padding: 8px;
+  border: none;
+  border-bottom: 1px solid #d4d4d4;
+  font-size: 14px;
+}
+.list-filter:focus {
+  outline: none;
+}

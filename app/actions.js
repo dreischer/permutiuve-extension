@@ -7,15 +7,18 @@ const initialState = {
   data: {
     events: {
       items: [],
-      count: 0
+      count: 0,
+      filter: null
     },
     segments: {
       items: [],
-      count: 0
+      count: 0,
+      filter: null
     },
     googleAM: {
       items: JSON.parse(window.sessionStorage[DFP_REQUESTS_KEY] || '[]'),
-      count: JSON.parse(window.sessionStorage[DFP_REQUESTS_KEY] || '[]').length
+      count: JSON.parse(window.sessionStorage[DFP_REQUESTS_KEY] || '[]').length,
+      filter: null
     }
   },
   navigation: {
@@ -31,27 +34,20 @@ const initialState = {
 const actions = {
   addEvent ({ get, set, dispatch }, event) {
     const { data } = get()
-    const nextEvents = [...data.events.items, event]
-    const newData = {
-      ...data,
-      events: {
-        items: nextEvents,
-        count: nextEvents.length
-      }
-    }
-    set({ data: newData })
+    const dataCopy = { ...data }
+    dataCopy.events.items.push(event)
+    dataCopy.events.count = dataCopy.events.items.length
+
+    set({ data: dataCopy })
   },
   updateSegments ({ get, set, dispatch }) {
     window.parent.permutive.segments(segs => {
       const { data } = get()
-      const newData = {
-        ...data,
-        segments: {
-          items: segs,
-          count: segs.length
-        }
-      }
-      set({ data: newData })
+      const dataCopy = { ...data }
+      dataCopy.segments.items = segs
+      dataCopy.segments.count = segs.length
+
+      set({ data: dataCopy })
     })
   },
   addDfp ({ get, set, dispatch }, message) {
@@ -59,15 +55,18 @@ const actions = {
       return
     }
     const { data } = get()
-    const dfpEvents = [...data.googleAM.items, message.data.data]
-    const newData = {
-      ...data,
-      googleAM: {
-        items: dfpEvents,
-        count: dfpEvents.length
-      }
-    }
-    set({ data: newData })
+    const dataCopy = { ...data }
+    dataCopy.googleAM.items.push(message.data.data)
+    dataCopy.googleAM.count = dataCopy.googleAM.items.length
+
+    set({ data: dataCopy })
+  },
+  setFilter ({ get, set, dispatch }, payload) {
+    const { data } = get()
+    const dataCopy = { ...data }
+    dataCopy[payload.type].filter = payload.value
+
+    set({ data: dataCopy })
   },
   toggleOpen ({ get, set, dispatch }) {
     const { open } = get()

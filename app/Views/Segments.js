@@ -1,23 +1,31 @@
 import React, { Component } from 'preact'
 import { Consumer } from 'tiny-atom/preact'
-import Item from '../components/Item'
+import List from '../components/List'
 
 export default class Segments extends Component {
   render (props, state) {
     const map = function (state) {
       return {
-        segments: state.data.segments.items.map(segment => <Item title={segment} />)
+        items: state.data.segments.items.map(mapSegment),
+        filter: state.data.segments.filter
       }
     }
     return (
       <Consumer map={map} >
-        {({ segments }) => (
-          <div className=''>
-            <h1 class='view-title'>Segments</h1>
-            {segments}
-          </div>
+        {({ items, filter, dispatch }) => (
+          <List items={items} filter={filter} setFilter={function (value) {
+            dispatch('setFilter', { type: 'segments', value })
+          }} title='Segments' />
         )}
       </Consumer>
     )
+  }
+}
+
+function mapSegment (item) {
+  return {
+    name: String(item),
+    subtitle: null,
+    payload: null
   }
 }

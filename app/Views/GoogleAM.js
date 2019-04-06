@@ -1,6 +1,39 @@
 import React, { Component } from 'preact'
 import { Consumer } from 'tiny-atom/preact'
-import Item from '../components/Item'
+import List from '../components/List'
+
+export default class Events extends Component {
+  render (props, state) {
+    const map = function (state) {
+      return {
+        items: state.data.googleAM.items.map(mapDFP),
+        filter: state.data.googleAM.filter
+      }
+    }
+    return (
+      <Consumer map={map} >
+        {({ items, filter, dispatch }) => (
+          <List items={items} filter={filter} setFilter={function (value) {
+            dispatch('setFilter', { type: 'googleAM', value })
+          }} title='Google AM' />
+        )}
+      </Consumer>
+    )
+  }
+}
+
+function mapDFP (item) {
+  const object = makeObject(item.url.split('?')[1])
+  const name = object.callback || object.iu_parts || object.slotname
+  const segments = object.cust_params && object.cust_params.permutive && object.cust_params.permutive.length
+  const subtitle = segments ? '✔ Targeted' : 'Not targeted'
+
+  return {
+    name,
+    subtitle,
+    payload: object
+  }
+}
 
 function makeObject (str) {
   const output = {}
@@ -22,31 +55,4 @@ function makeObject (str) {
   })
 
   return output
-}
-
-export default class Segments extends Component {
-  render (props, state) {
-    const map = function (state) {
-      return {
-        events: state.data.googleAM.items.map(event => {
-          const object = makeObject(event.url.split('?')[1])
-          const name = object.iu || object.iu_parts || object.slotname
-          const segments = object.cust_params && object.cust_params.permutive && object.cust_params.permutive.length
-          const targeted = segments ? '✔ Targeted' : 'Not targeted'
-
-          return <Item payload={object} title={name} subtitle={targeted} />
-        })
-      }
-    }
-    return (
-      <Consumer map={map} >
-        {({ events }) => (
-          <div className=''>
-            <h1 class='view-title'>Google Ad Manager</h1>
-            { events }
-          </div>
-        )}
-      </Consumer>
-    )
-  }
 }

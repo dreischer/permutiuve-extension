@@ -14,9 +14,6 @@ html, body {
   overflow-y: scroll;
 }
 
-html {
-}
-
 * {
 	box-sizing: border-box;
 }
@@ -30,10 +27,4 @@ html {
 	min-height: 100%;
 	width: 100%;
 	background: #fff;
-}
-.list-filter {
-  width: 100%;
-  border-radius: 5px;
-  padding: 10px;
-  border: 1px solid #d4d4d4;
 }
