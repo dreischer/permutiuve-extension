@@ -31,3 +31,9 @@ html {
 	width: 100%;
 	background: #fff;
 }
+.list-filter {
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #d4d4d4;
+}
