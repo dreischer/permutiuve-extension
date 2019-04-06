@@ -29,11 +29,10 @@ export default class Segments extends Component {
     const map = function (state) {
       return {
         events: state.data.googleAM.items.map(event => {
-          const url = decodeURIComponent(event.url)
-          const name = url.match(/iu(_parts)?=([^&]+)/) && url.match(/iu(_parts)?=([^&]+)/)[2]
-          const segments = decodeURIComponent(url).match(/permutive=([^&]+)/)
-          const targeted = segments ? '✔ Targeted' : 'Not targeted'
           const object = makeObject(event.url.split('?')[1])
+          const name = object.iu || object.iu_parts || object.slotname
+          const segments = object.cust_params && object.cust_params.permutive && object.cust_params.permutive.length
+          const targeted = segments ? '✔ Targeted' : 'Not targeted'
 
           return <Item payload={object} title={name} subtitle={targeted} />
         })

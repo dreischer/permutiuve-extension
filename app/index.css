@@ -10,7 +10,6 @@ html, body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 14px;
-	color: rgb(97,104,106);
   overflow-x: hidden;
   overflow-y: scroll;
 }

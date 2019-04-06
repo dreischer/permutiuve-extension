@@ -12,7 +12,7 @@ export default class Menu extends Component {
     const clickHandler = this.clickHandler(item.id).bind(this)
     const count = counts && counts[item.id] ? ` (${counts[item.id]})` : ''
 
-    return <a className={isActive} onClick={clickHandler}>{item.name + count}</a>
+    return <a className={isActive} onClick={clickHandler}><span>{item.name + count}</span></a>
   }
   render (props, state) {
     const items = props.items.map((item) => this.getItem(item, props.counts))

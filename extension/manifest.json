@@ -17,7 +17,7 @@
   },
   "browser_action": {
     "default_title": "Permutive Events",
-    "default_icon": "img.png"
+    "default_icon": "icon-enabled.png"
   },
   "web_accessible_resources": [
     "dist/loader.js",

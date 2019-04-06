@@ -10,7 +10,7 @@ window.chrome.runtime.onConnect.addListener(function (port) {
 })
 
 function setIcon (active) {
-  var icon = active ? './img-2.png' : './img.png'
+  var icon = active ? 'icon-enabled.png' : 'icon-disabled.png'
   window.chrome.browserAction.setIcon({
     path: icon
   })
@@ -27,7 +27,7 @@ function isActive () {
 
 // injecting content script
 window.chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-  if (isActive() && changeInfo.status === 'complete') {
+  if (isActive() && changeInfo.status === 'loading') {
     window.chrome.tabs.executeScript(tabId, {
       file: './loader.js'
     })
@@ -37,15 +37,13 @@ window.chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 // sending DFP ad requests to content script
 window.chrome.tabs.onCreated.addListener(function (tab) {
   var callback = function (details) {
-    if (details.frameId === 0) {
-      window.chrome.tabs.sendMessage(tab.id, {
-        name: 'perm_extension_dfpRequest',
-        url: details.url
-      })
-    }
+    window.chrome.tabs.sendMessage(tab.id, {
+      name: 'perm_extension_dfpRequest',
+      url: details.url
+    })
   }
   var filter = {
-    urls: ['*://securepubads.g.doubleclick.net/gampad/ads?*'],
+    urls: ['*://securepubads.g.doubleclick.net/gampad/ads?*', '*://pubads.g.doubleclick.net/gampad/ads?*'],
     tabId: tab.id
   }
   window.chrome.webRequest.onCompleted.addListener(callback, filter)

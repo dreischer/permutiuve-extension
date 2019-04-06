@@ -9,9 +9,9 @@ export default class Wrapper extends Component {
   componentDidMount () {
     const { atom } = this.props
     atom.actions.updateSegments()
+    window.parent.addEventListener('message', atom.actions.addDfp)
     const allEvents = window.parent.permutive.on(/.*/, atom.actions.addEvent).replay()
     const segmentEvents = window.parent.permutive.on(/Segment(Entry|Exit)/, atom.actions.updateSegments)
-    window.parent.addEventListener('message', atom.actions.addDfp)
     window.eventListeners = window.eventListeners || []
     window.eventListeners = [allEvents, segmentEvents]
   }

@@ -1,3 +1,6 @@
+.menu {
+  margin-bottom: 25px;
+}
 .menu a {
   text-decoration: none;
   color: rgb(97,104,106);
@@ -11,6 +14,8 @@
 .menu a:last-of-type:after {
   content: '';
 }
-.menu a.menu-active {
-  text-decoration: underline;
+.menu a.menu-active span {
+  padding-bottom: 5px;
+  border-bottom: 2px solid #444444d9;
+  color: #444;
 }
