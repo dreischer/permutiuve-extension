@@ -7,7 +7,7 @@
   const OPEN_KEY = '_prmtv_widgetOpen'
   const DFP_REQUESTS_KEY = '_prmtv_dfpRequests'
   const OPEN_CLASSNAME = 'prmtv_active'
-  const CDN_APP_URL = '../dist/app.js'
+  const CDN_APP_URL = 'https://storage.googleapis.com/permutive-demos/extension/app.js'
 
   addCss(`
     .prtv_viewer {
