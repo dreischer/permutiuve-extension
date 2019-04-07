@@ -37,10 +37,13 @@ window.chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 // sending DFP ad requests to content script
 window.chrome.tabs.onCreated.addListener(function (tab) {
   var callback = function (details) {
-    window.chrome.tabs.sendMessage(tab.id, {
-      name: 'perm_extension_dfpRequest',
-      url: details.url,
-      frameId: details.frameId
+    window.chrome.webNavigation.getFrame({ tabId: tab.id, frameId: details.frameId }, function (frame) {
+      window.chrome.tabs.sendMessage(tab.id, {
+        name: 'perm_extension_dfpRequest',
+        url: details.url,
+        frameId: details.frameId,
+        frameUrl: frame && frame.url
+      })
     })
   }
   var filter = {

@@ -8,6 +8,7 @@
     "tabs",
     "activeTab",
     "webRequest",
+    "webNavigation",
     "http://*/",
     "https://*/"
   ],
