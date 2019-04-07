@@ -46,8 +46,8 @@ class Inner extends Component {
     window.eventListeners = window.eventListeners || []
     window.eventListeners = [allEvents, segmentEvents]
 
-    // only replay event if queue still exists (permutive didn't initialise)
-    if (!window.parent.permutive.q) {
+    // only replay events if permutive has initialised
+    if (!window.parent.permutive.q && allEvents && allEvents.replay) {
       allEvents.replay()
     }
   }

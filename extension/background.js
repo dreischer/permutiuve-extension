@@ -39,7 +39,8 @@ window.chrome.tabs.onCreated.addListener(function (tab) {
   var callback = function (details) {
     window.chrome.tabs.sendMessage(tab.id, {
       name: 'perm_extension_dfpRequest',
-      url: details.url
+      url: details.url,
+      frameId: details.frameId
     })
   }
   var filter = {

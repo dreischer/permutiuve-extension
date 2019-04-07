@@ -34,11 +34,16 @@ class Inner extends Component {
   }
   render (props, state) {
     const items = this.getItems()
+    const css = {
+      'font-size': '20px',
+      'padding': '10px 10px'
+    }
+    const content = items.length ? <Items items={items} /> : <div style={css}>🤷‍ No results...</div>
 
     return (
       <div>
         <Filter callback={this.updateFilter} value={props.filter} />
-        <Items items={items} />
+        {content}
       </div>
     )
   }
@@ -49,8 +54,8 @@ class Items extends Component {
     return (
       <div class='list'>
         {props.items.map(item => {
-          const { name, subtitle, payload } = item
-          return <Item payload={payload} title={name} subtitle={subtitle} />
+          const { name, subtitle, payload, tooltip } = item
+          return <Item payload={payload} title={name} subtitle={subtitle} tooltip={tooltip} />
         })}
       </div>
     )

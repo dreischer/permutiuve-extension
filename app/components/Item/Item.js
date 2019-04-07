@@ -25,7 +25,7 @@ export default class Item extends Component {
   }
 
   render (props, state) {
-    const { payload, title, subtitle } = props
+    const { payload, title, subtitle, tooltip } = props
     const openClass = state.open ? 'open' : ''
     const activeClass = state.hasPayload ? 'hasPayload' : ''
     const content = !state.open ? null : (<AceEditor
@@ -42,7 +42,7 @@ export default class Item extends Component {
 
     return (
       <div class={`item ${openClass}`}>
-        <div class={`item-summary ${activeClass}`} onclick={this.toggle}>
+        <div title={tooltip} class={`item-summary ${activeClass}`} onclick={this.toggle}>
           <div class='item-title'>{title}</div>
           <div class='item-subtitle'>{subtitle}</div>
         </div>

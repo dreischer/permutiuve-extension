@@ -20,6 +20,9 @@
   display: inline-block;
   margin-right: 20px;
   font-weight: bold;
+  max-width: 450px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .item-summary .item-subtitle {
   display: inline-block;

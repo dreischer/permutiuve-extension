@@ -25,13 +25,19 @@ export default class Events extends Component {
 function mapDFP (item) {
   const object = makeObject(item.url.split('?')[1])
   const name = object.iu || object.iu_parts || object.slotname
-  const segments = object.cust_params && object.cust_params.permutive && object.cust_params.permutive.length
+  const displayName = Array.isArray(name) ? name.join(',') : name
+  const segments = object.cust_params && object.cust_params.permutive
   const subtitle = segments ? '✔ Targeted' : 'Not targeted'
 
   return {
-    name,
+    name: displayName,
     subtitle,
-    payload: object
+    payload: object,
+    tooltip: JSON.stringify({
+      name: displayName,
+      rts: !!segments && segments.indexOf('rts') !== -1,
+      frameId: item.frameId
+    }, null, 2)
   }
 }
 
