@@ -1,9 +1,14 @@
-const OPEN_KEY = '_prmtv_widgetOpen'
-const DFP_REQUESTS_KEY = '_prmtv_dfpRequests'
-const OPEN_CLASSNAME = 'prmtv_active'
-const CDN_APP_URL = '../dist/app.js'
-
 ;(function initPermutiveIframe () {
+  if (window._prmtv_extension) {
+    return
+  } else {
+    window._prmtv_extension = true
+  }
+  const OPEN_KEY = '_prmtv_widgetOpen'
+  const DFP_REQUESTS_KEY = '_prmtv_dfpRequests'
+  const OPEN_CLASSNAME = 'prmtv_active'
+  const CDN_APP_URL = '../dist/app.js'
+
   addCss(`
     .prtv_viewer {
       display: none;
