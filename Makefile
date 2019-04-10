@@ -10,6 +10,7 @@ dev:
 
 build: clean test
 	NODE_ENV=production $(BIN)/webpack -p --progress --mode=production
+	zip -r ./dist/extension.zip ./extension
 
 test: lint
 	#$(BIN)/karma start --single-run

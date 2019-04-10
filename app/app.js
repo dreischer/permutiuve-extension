@@ -7,9 +7,8 @@ import Menu from './components/Menu'
 
 import './index.css'
 
-const log = require('tiny-atom/log')
 const { actions } = require('./actions')
-const atom = createAtom(initialState(), actions, { debug: log() })
+const atom = createAtom(initialState(), actions)
 
 function initialState () {
   const { initialState } = require('./actions')
