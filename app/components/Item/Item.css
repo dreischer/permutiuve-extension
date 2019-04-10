@@ -18,8 +18,9 @@
 }
 .item-summary .item-title {
   display: inline-block;
-  margin-right: 20px;
+  /* margin-right: 20px; */
   font-weight: bold;
+  white-space: nowrap;
   max-width: 450px;
   overflow: hidden;
   text-overflow: ellipsis;
