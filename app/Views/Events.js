@@ -23,9 +23,15 @@ export default class Events extends Component {
 }
 
 function mapEvent (item) {
+  // fix for LinkClick events coming through as strings
+  if (typeof item === 'string') {
+    try {
+      item = JSON.parse(item)
+    } catch (e) {}
+  }
   return {
     name: item.name,
-    subtitle: new Date(item.time).toLocaleString(),
+    subtitle: item.time && new Date(item.time).toLocaleString(),
     payload: item
   }
 }
