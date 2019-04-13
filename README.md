@@ -1,9 +1,7 @@
 <p align="center">
   <img src="https://img.shields.io/github/package-json/v/dreischer/permutive-extension.svg" />
-  <img src="https://img.shields.io/badge/code%20style-standard.js-brightgreen.svg" />
+  <a href="https://github.com/standard/standard"><img src="https://img.shields.io/badge/code%20style-standard.js-brightgreen.svg" /></a>
 </p>
-
----
 
 # Overview
 ## Prerequisites
@@ -16,8 +14,6 @@ Some of the main libraries used
 * [**webpack**](https://github.com/webpack/webpack) - module bundler & dev sever
 * [**bublé**](https://github.com/bublejs/buble) - fast ES5 compiler
 * [**react-ace**](https://github.com/securingsincity/react-ace) - ace editor for react (in combination with [brace](https://github.com/thlorenz/brace))
-
----
 
 # Development setup
 ## Chrome extension
@@ -36,7 +32,6 @@ For development you'll need to point the extension to your local dev server rath
 ## Start dev server
 * Run `$ make dev`
 * Open `https://localhost:9000/dist/app.js` to allow Chrome to allow it as an unsafe resource
----
 
 # Deployment
 
