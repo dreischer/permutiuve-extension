@@ -1,6 +1,6 @@
 <p align="center">
-![](https://img.shields.io/github/package-json/v/dreischer/permutive-extension.svg)
-![](https://img.shields.io/badge/code%20style-standard.js-brightgreen.svg)
+  <img src="https://img.shields.io/github/package-json/v/dreischer/permutive-extension.svg" />
+  <img src="https://img.shields.io/badge/code%20style-standard.js-brightgreen.svg" />
 </p>
 
 ---
