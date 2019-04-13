@@ -4,11 +4,13 @@ import { Provider, Consumer } from 'tiny-atom/preact'
 import Header from './components/Header'
 import Icon from './components/Icon'
 import Menu from './components/Menu'
+import log from 'tiny-atom/log'
 
 import './index.css'
 
 const { actions } = require('./actions')
-const atom = createAtom(initialState(), actions)
+const atomDebug = module.hot ? log() : false
+const atom = createAtom(initialState(), actions, { debug: atomDebug })
 
 function initialState () {
   const { initialState } = require('./actions')
