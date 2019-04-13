@@ -1,23 +1,23 @@
-<p align="center">
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-</p>
+![](https://img.shields.io/github/package-json/v/dreischer/permutive-extension.svg)
+![](https://img.shields.io/badge/code%20style-standard.js-brightgreen.svg)
 <hr>
 
 # Deployment
 
-* Run `$ make build`
-* Upload `dist/app.js` and `dist/app.js.map` to the CDN
-
-TODO:
-* Upload app file to a CDN and set it as `CDN_APP_URL` in `extension/loader.js`
-* Upload the extension to the Chrome Web Store
+1. Run `$ make build` to create the `dist` folder with the following files:
+  * `app.js` - this file contains the main app
+  * `app.js.map` - this is the source map for `app.js`
+  * `extension.zip` - this is the chrome extension which loads `app.js`
+  * `report.html` - this is the output of `webpack-bundle-analyzer`
+2. Upload `app.js` and `app.js.map` to the `permutive-extensions` GCS bucket and place them inside the `extensions` folder. They'll be available on our CDN (`https://cdn.permutive.com/extensions/app.js`).
+3. When making updates to the extension you'll need to upload `extension.zip` to the Chrome Web Store. Don't forget to increase the version number in `manifest.json`.
 
 <hr>
 
 # Development setup
 
 ## Chrome extension
-* Open "Extensions" in Google Chrome (chrome://extensions/)
+* Open "Extensions" in Google Chrome (`chrome://extensions/`)
 * Enable development mode and click on "Load unpacked"
 * Select the `extension` folder from this project:
 <img width="1539" alt="Screen Shot 2019-03-10 at 19 45 37" src="https://user-images.githubusercontent.com/5756475/54090554-446cfb80-436d-11e9-991b-3215db68d39b.png">
